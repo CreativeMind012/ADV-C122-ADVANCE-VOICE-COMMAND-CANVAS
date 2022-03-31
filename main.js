@@ -17,7 +17,7 @@ function preload() {
 
 function start()
 {
-  document.getElementById("status").innerHTML = "System is listening please speak";  
+  document.getElementById("status").innerHTML = "System is listening please speak";  // error
   recognition.start();
 } 
  
@@ -27,12 +27,13 @@ recognition.onresult = function(event) {
     content = event.results[0][0].transcript;
     document.getElementById("status").innerHTML = "The speech has been recognized: " + content; 
     to_number = Number(content);
+
     if (Number.isInteger(to_number)){
-      status = "Started drawing apple";
+      document.getElementById("status").innerHTML = "Started drawing apple";
       draw_apple = "set";
     }
     else{
-      status = "The speech has not recognized a number.";
+      document.getElementById("status").innerHTML = "The speech has not recognized a number.";
     }
 }
 
@@ -51,11 +52,12 @@ function draw() {
       y= Math.floor(Math.random() * 400);
       image(apple, x, y, 50, 50)
     }
-  }
   document.getElementById("status").innerHTML = to_number + " Apples drawn";
-  speak_data = to_number + " Apples Drawn";
+  speak_data = to_number + " Apples drawn"; 
   speak();
   draw_apple = "";
+  speak_data = "";
+  }
 }
 
 function speak(){
